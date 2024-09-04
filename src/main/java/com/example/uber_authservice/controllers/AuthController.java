@@ -62,6 +62,7 @@ public class AuthController {
                         .path("/")
                         .maxAge(3600)
                         .build();
+                System.out.println("X");
 
                 response.setHeader("Set-Cookie", cookie.toString());
 
