@@ -5,6 +5,7 @@ import com.example.uber_authservice.DTOs.PassengerSignupRequestDTO;
 import com.example.uber_authservice.services.AuthService;
 import com.example.uber_authservice.services.JwtService;
 import com.example.uber_authservice.services.UserDetailsServiceImpl;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
@@ -16,10 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -78,4 +76,12 @@ public class AuthController {
 
 
     }
+
+    @GetMapping("/validate/")
+    public ResponseEntity<?> validateToken(HttpServletRequest request){
+        for(Cookie cookie: request.getCookies()) {
+            System.out.println(cookie.getName());
+        }
+        return new ResponseEntity<>("Success", HttpStatus.OK);
+     }
 }

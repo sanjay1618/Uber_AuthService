@@ -17,10 +17,10 @@ import java.util.Map;
 @Service
 public class JwtService implements CommandLineRunner{
     @Value("${jwt.expiry}")
-    private Long expiry;
+    public Long expiry;
 
     @Value("${jwt.secret}")
-    private String secret;
+    public String secret;
 
     public String createToken(Map<String, Object> claims, String email) {
         Date now = new Date();
@@ -39,7 +39,7 @@ public class JwtService implements CommandLineRunner{
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
-    private Claims getClaimsFromToken(String token) {
+    public Claims getClaimsFromToken(String token) {
         return Jwts.parser()
                 .setSigningKey(getSecretKey())
                 .build()
@@ -47,15 +47,15 @@ public class JwtService implements CommandLineRunner{
                 .getBody();
     }
 
-    private String extractUsernameFromToken(String token) {
+    public String extractUsernameFromToken(String token) {
         return getClaimsFromToken(token).getSubject();
     }
 
-    private Boolean isTokenExpired(String token) {
+    public Boolean isTokenExpired(String token) {
         return getClaimsFromToken(token).getExpiration().before(new Date());
     }
 
-    private Boolean validateToken(String token, String email) {
+    public Boolean validateToken(String token, String email) {
         final String userEmail = getClaimsFromToken(token).getSubject();
         return userEmail.equals(email) && isTokenExpired(token);
     }
