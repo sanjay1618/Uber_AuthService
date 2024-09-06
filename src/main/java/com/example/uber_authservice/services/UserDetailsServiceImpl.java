@@ -1,7 +1,7 @@
 package com.example.uber_authservice.services;
 
 import com.example.uber_authservice.helpers.AuthUserDetails;
-import com.example.uber_authservice.models.Passenger;
+import com.example.uberprojectentityservice.models.Passenger;
 import com.example.uber_authservice.repository.PassengerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
